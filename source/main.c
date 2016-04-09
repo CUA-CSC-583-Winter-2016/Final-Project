@@ -6,5 +6,5 @@
 #include <matrix_math.h>
 
 int main (int argc, const char *argv[]) {
-  printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference
+  printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference and actually glew all the code together.
 }

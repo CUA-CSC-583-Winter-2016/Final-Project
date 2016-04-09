@@ -1,8 +1,10 @@
 #ifndef MATRIX_MATH_H
 #define MATRIX_MATH_H
+#include <stdint.h>
 
 /*
   Calculates the projection matrix assuming that the screen lays on the xy plane. everything behind it in -z will be in view.
+  See graphics/proj_matrix.png
   @param left x value for left side of screen relative to origin.
   @param right x value for right side of screen.
   @param top y value for top of screen.
@@ -11,6 +13,16 @@
   @param eye pointer to eye vector.
   @param mat matrix output, row major.
 */
-void screen_proj_mat(float left, float right, float top, float bottom, float far, const float *eye, float *mat);
+void eye_proj_mat(float left, float right, float top, float bottom, float far, const float *eye, float *mat);
+
+/*
+  Unproject x, y, and depth to rectangular coordinates for the kinect.
+  See graphics/kinect_coords_to_real_space.png
+  @param xin x coordinate for pixel.
+  @param yin y coordinate for pixel.
+  @param zin depth value at pixel (x,y).
+  @param outx output
+*/
+void unproject_kinect_depth(int xin, int yin, uint16_t zin, float *outx, float *outy, float *outz);
 
 #endif
