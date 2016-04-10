@@ -16,7 +16,7 @@
 void eye_proj_mat(float left, float right, float top, float bottom, float far, const float *eye, float *mat);
 
 /*
-  Unproject x, y, and depth to rectangular coordinates for the kinect.
+  Unproject x, y, and depth to rectangular coordinates.
   See graphics/kinect_coords_to_real_space.png
   @param xin x coordinate for pixel.
   @param yin y coordinate for pixel.
