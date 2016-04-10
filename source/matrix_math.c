@@ -42,7 +42,7 @@ void eye_proj_mat(float left, float right, float top, float bottom, float far, c
 
 void unproject_kinect_depth(int xin, int yin, uint16_t zin, float *xout, float *yout, float *zout) {
   // See these pages for info on the kinect depth data
-  // https://openkinect.org/wiki/Imaging_Information
+  // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
   // https://msdn.microsoft.com/en-us/library/hh973078.aspx
   // TODO implement
   *xout = xin;
