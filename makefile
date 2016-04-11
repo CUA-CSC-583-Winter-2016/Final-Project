@@ -7,7 +7,7 @@ OBJS = $(patsubst source/%.cpp, bin/%.o, $(patsubst source/%.c,bin/%.o,$(SRCS)))
 default: test
 
 #All object files
-bin/main: $(OBJS) bin/shaders.o
+bin/main: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o bin/main
 
 bin/main.o: source/main.c
