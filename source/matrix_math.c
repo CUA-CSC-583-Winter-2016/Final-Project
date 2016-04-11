@@ -43,6 +43,7 @@ void eye_proj_mat(GLfloat left, GLfloat right, GLfloat top, GLfloat bottom, GLfl
 
 void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfloat *outy, GLfloat *outz) {
   // See these pages for info on the kinect depth data
+  // https://openkinect.org/wiki/Calibration
   // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
   // https://msdn.microsoft.com/en-us/library/hh973078.aspx
   // TODO implement
