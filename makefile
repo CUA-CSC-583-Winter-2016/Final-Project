@@ -1,8 +1,8 @@
 LIBS = -lGL -lglfw -lGLEW
 CFLAGS = -Iinclude
-SRCS = $(wildcard source/*.c) # All C files
+SRCS = $(wildcard source/*.c) $(wildcard source/*.cpp) # All C and CPP files
 SHSRCS = $(wildcard source/*.glsl) # All shader files
-OBJS = $(patsubst source/%.c,bin/%.o,$(SRCS)) bin/shaders.o # All the objects that are needed for main
+OBJS = $(patsubst source/%.cpp, bin/%.o, $(patsubst source/%.c,bin/%.o,$(SRCS))) bin/shaders.o # All the objects that are needed for main
 
 default: test
 
@@ -16,6 +16,9 @@ bin/main.o: source/main.c
 # % is like a wildcard. $< is first prerequisite. $@ is the target.
 bin/%.o: source/%.c include/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
+
+bin/%.o: source/%.cpp include/%.h
+	$(CXX) $(CFLAGS) -c $< -o $@
 
 bin/shaders.o: $(SHSRCS)
 	ld -r -b binary -o bin/shaders.o $(SHSRCS)
