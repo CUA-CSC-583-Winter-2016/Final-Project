@@ -2,8 +2,8 @@
 
 ## Matrix and linear algebra etc.
 timmy, andy
-* [`include/matrix_math.h`](include/head_tracker.h)
-* [`source/matrix_math.c`](source/head_tracker.c)
+* [`include/matrix_math.h`](include/matrix_math.h)
+* [`source/matrix_math.c`](source/matrix_math.c)
 
 ## Kinect data acquisition
 fily, gabe
