@@ -1,7 +1,7 @@
 #Roles
 
 - [x] Implemented
-- [ ] Unimplemented
+- [ ] Working on it
 
 ## Matrix and linear algebra etc.
 timmy, andy
