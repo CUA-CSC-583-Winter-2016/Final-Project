@@ -8,9 +8,9 @@ void create_window();
 
 /*
   Checks if the window should be closed.
-  @return true when window should be closed.
+  @return 1 when window should be closed, zero otherwise.
 */
-bool should_close_window();
+int should_close_window();
 
 /*
   Swaps the drawing buffer.

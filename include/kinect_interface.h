@@ -4,9 +4,9 @@
 #include <stdint.h>
 /*
   Initializes and chooses a kinect.
-  @return false if initialization fails.
+  @return 1 if initialization fails, zero otherwise.
 */
-bool init_kinect();
+int init_kinect();
 
 /*
   Get depth buffer.
