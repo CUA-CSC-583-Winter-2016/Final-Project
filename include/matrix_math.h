@@ -1,6 +1,7 @@
 #ifndef MATRIX_MATH_H
 #define MATRIX_MATH_H
 #include <stdint.h>
+#include <GL/glew.h>
 
 /*
   Calculates the projection matrix assuming that the screen lays on the xy plane. everything behind it in -z will be in view.
@@ -24,5 +25,7 @@ void eye_proj_mat(float left, float right, float top, float bottom, float far, c
   @param outx output
 */
 void unproject_kinect_depth(int xin, int yin, uint16_t zin, float *outx, float *outy, float *outz);
+
+void mat_mult(GLfloat *m1, GLfloat *m2, GLfloat *m3, int r1, int c1, int c2);
 
 #endif
