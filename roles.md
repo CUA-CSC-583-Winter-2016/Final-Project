@@ -13,6 +13,8 @@ fily, gabe
 
 - [ ] [`include/kinect_interface.h`](include/kinect_interface.h) [`source/kinect_interface.c`](source/kinect_interface.c)
 
+Check out my test.c program [here](https://github.com/michaellmonaghan/glnect/blob/master/test.c) that uses the libfreenect api to display the rgb camera from the kinect.
+
 ## Head Tracking
 mickey, snowboard-ninja-5
 
