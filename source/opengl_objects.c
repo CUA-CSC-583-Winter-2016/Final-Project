@@ -34,8 +34,8 @@ GLuint boxShaderProgram;
 void load_cube() {
   // vertex shader
   GLuint boxVertShader = glCreateShader(GL_VERTEX_SHADER);
-  const GLchar *vertexShader = _binary_vertex_glsl_start;
-  const GLint vertexShaderSize = (int)(long)&_binary_vertex_glsl_size;
+  const GLchar *vertexShader = _binary_source_vertex_glsl_start;
+  const GLint vertexShaderSize = (int)(long)&_binary_source_vertex_glsl_size;
   printf("vertex shader %i characters\n",vertexShaderSize);
   printf("%.*s",vertexShaderSize,vertexShader);
   glShaderSource(boxVertShader, 1, &vertexShader, &vertexShaderSize);
@@ -54,8 +54,8 @@ void load_cube() {
 
   // fragment shader
   GLuint boxFragShader = glCreateShader(GL_FRAGMENT_SHADER);
-  const GLchar *fragmentShader = _binary_fragment_glsl_start;
-  const GLint fragmentShaderSize = (int)(long)&_binary_fragment_glsl_size;
+  const GLchar *fragmentShader = _binary_source_fragment_glsl_start;
+  const GLint fragmentShaderSize = (int)(long)&_binary_source_fragment_glsl_size;
   printf("fragment shader %i characters\n",fragmentShaderSize);
   printf("%.*s\n",fragmentShaderSize,fragmentShader);
   glShaderSource(boxFragShader, 1, &fragmentShader, &fragmentShaderSize);
