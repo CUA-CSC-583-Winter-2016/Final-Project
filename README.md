@@ -18,3 +18,4 @@ The running `make` will compile and run a simple hello world like program that w
 
 ## File Structure
 Header files are in `include` and source code is in `source`.
+`include` is passed as an include directory to the compiler so including a file is as simple as `#include "my_beautiful_header.h"`
