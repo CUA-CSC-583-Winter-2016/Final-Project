@@ -23,7 +23,7 @@ mickey
 
 - [x] [`include/opengl_objects.h`](include/opengl_objects.h) [`source/opengl_objects.c`](source/opengl_objects.c)
 
-## Glueing everything together
+## Gluing everything together
 mickey
 
 - [ ] [`source/main.c`](source/main.c)
