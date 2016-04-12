@@ -26,10 +26,14 @@ int create_window() {
   glfwMakeContextCurrent(window);
   glfwSetKeyCallback(window, key_callback);
   glewExperimental = GL_TRUE;
-  glewInit(); // HAS TO BE CALLED AFTER THE WINDOW IS CREATED! WHY DID NO ONE TELL ME THIS!!!
+  glewInit(); // HAS TO BE CALLED AFTER THE WINDOW IS CREATED! WHY DID NO ONE TELL ME THIS (0_0)
   return 0;
 }
 
+int should_close_window() {
+  glfwPollEvents();
+  return glfwWindowShouldClose(window);
+}
 
 void swap_buffers() {
   glfwSwapBuffers(window);
