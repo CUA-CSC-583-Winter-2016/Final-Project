@@ -23,6 +23,6 @@ int main (int argc, const char *argv[]) {
     swap_buffers();
   }
   destroy_cube();
-
+  close_window();
   return 0;
 }
