@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <GL/glew.h>
 
+//This is a useful comment
+
 /**
   Calculates the projection matrix assuming that the screen lays on the xy plane. everything behind it in -z will be in view.
   See graphics/proj_matrix.png
