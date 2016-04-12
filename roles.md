@@ -20,14 +20,13 @@ mickey, snowboard-ninja-5
 
 - [ ] [`include/head_tracker.h`](include/head_tracker.h) [`source/head_tracker.c`](source/head_tracker.c)
 
-## OpenGL windowing and objects
+## OpenGL windowing and rendering
 mickey
 
-- [x] [`include/opengl_objects.h`](include/opengl_objects.h) [`source/opengl_objects.c`](source/opengl_objects.c)
+- [x] [`include/opengl_window.h`](include/opengl_window.h) [`source/opengl_window.c`](source/opengl_window.c)
+- [x] [`include/opengl_rendering.h`](include/opengl_rendering.h) [`source/opengl_rendering.c`](source/opengl_rendering.c)
 
 ## Gluing everything together
 mickey
 
 - [ ] [`source/main.c`](source/main.c)
-
-
