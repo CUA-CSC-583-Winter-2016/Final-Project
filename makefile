@@ -17,7 +17,7 @@ bin/main.o: source/main.c
 bin/%.o: source/%.c include/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bin/opengl_objects.o: source/opengl_objects.c include/opengl_objects.h include/shaders.h
+bin/opengl_rendering.o: source/opengl_rendering.c include/opengl_rendering.h include/shaders.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bin/%.o: source/%.cpp include/%.h

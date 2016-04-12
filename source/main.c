@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "opengl_window.h"
-#include "opengl_objects.h"
+#include "opengl_rendering.h"
 #include "kinect_interface.h"
 #include "head_tracker.h"
 #include "matrix_math.h"
