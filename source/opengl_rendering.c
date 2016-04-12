@@ -114,7 +114,7 @@ void load_cube() {
 
 void set_cube_matrix(GLfloat *matrix) {
   glUseProgram(boxShaderProgram);
-  glUniformMatrix4fv(boxMatrixLocation, 1, GL_FALSE, matrix);
+  glUniformMatrix4fv(boxMatrixLocation, 1, GL_TRUE, matrix);
 }
 
 void draw_cube(){
