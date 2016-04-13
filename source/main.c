@@ -22,12 +22,7 @@ int main (int argc, const char *argv[]) {
   set_clear_color(0.0,0.0,0.0);
   load_cube();
 
-  GLfloat m[4*4] = { // This matrix at least works.
-    0.5,0.0,0.0,0.0,
-    0.0,0.5,0.0,0.0,
-    0.0,0.0,0.5,0.0,
-    0.0,0.0,0.25,1.0,
-  };
+  GLfloat m[4*4];
   uint16_t c[640*480];
   uint16_t b[640*480];
   get_depth(b);
