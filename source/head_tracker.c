@@ -15,5 +15,5 @@
 void locate_head(const uint16_t *background, const uint16_t *current, int width, int height, int *x, int *y, uint16_t *z){
   *x=width/2;
   *y=width/2;
-  *z=100;
+  *z = current[*x + *y*width];
 }
