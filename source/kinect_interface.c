@@ -7,6 +7,6 @@ int init_kinect() {
 
 void get_depth(uint16_t *buffer) {
   for (int i = 0; i < 640*480; i++) {
-    buffer[i] = 100;
+    buffer[i] = 10;
   }
 }

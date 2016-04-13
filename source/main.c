@@ -10,6 +10,11 @@
 #include "head_tracker.h"
 #include "matrix_math.h"
 
+void printmat(GLfloat *m) {
+  printf("%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n",
+      m[0],m[1],m[2],m[3],m[4],m[5],m[6],m[7],m[8],m[9],m[10],m[11],m[12],m[13],m[14],m[15]);
+}
+
 int main (int argc, const char *argv[]) {
   printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference and actually glew all the code together.
   create_window();
@@ -37,8 +42,14 @@ int main (int argc, const char *argv[]) {
     GLfloat eye[3];
     // TODO rotate and translate kinect local coord to global space.
     eye[0] = kx; eye[1] = ky; eye[2] = kz;
-    //eye_proj_mat (10.0,10.0,10.0,10.0,10.0, eye, m); // Not working yet.
+    eye_proj_mat (-320.0,320.0,240.0,-240.0,1.0, eye, m); // Not working yet.
     set_cube_matrix(m);
+    #ifdef DEBUG
+      printf("\nhead coord:\n(%i,%i,%i)\n",cx,cy,cz);
+      printf("kinect local coord:\n(%f,%f,%f)\n",kx,ky,kz);
+      printf("eye coord:\n(%f,%f,%f)\n",eye[0],eye[1],eye[2]);
+      printmat(m);
+    #endif
 
     // render
     clear();

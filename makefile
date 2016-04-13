@@ -1,4 +1,4 @@
-LIBS = -lGL -lglfw -lGLEW
+LIBS = -lGL -lglfw -lGLEW -lm
 CFLAGS = -Iinclude
 SRCS = $(wildcard source/*.c) $(wildcard source/*.cpp) # All C and CPP files
 SHSRCS = $(wildcard source/*.glsl) # All shader files

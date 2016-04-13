@@ -1,4 +1,5 @@
 #include "head_tracker.h"
+#include <math.h>
 
 /*
   Just a note,
@@ -12,8 +13,14 @@
 #define TOO_NEAR 0x0000
 #define TOO_FAR 0x0FFF
 #define UNKNOWN 0x1FFF
+float rotation = 0;
 void locate_head(const uint16_t *background, const uint16_t *current, int width, int height, int *x, int *y, uint16_t *z){
-  *x=width/2;
-  *y=width/2;
+
+  *x=320+320*cos(rotation);
+  *y=240+240*sin(rotation);
+  rotation += .005;
+  if (rotation > 2 * M_PI) {
+    rotation -= 2*M_PI;
+  }
   *z = current[*x + *y*width];
 }

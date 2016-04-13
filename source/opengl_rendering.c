@@ -15,13 +15,30 @@
      \|      \|   \|
       1-------5    '-----x
 */
-GLfloat boxVerticies[8][3] =
+GLfloat unitBoxVerticies[8][3] =
 {
   {-1,-1,-1},{-1,-1,1},
   {-1,1,1},{-1,1,-1},
 
   {1,-1,-1},{1,-1,1},
   {1,1,1},{1,1,-1},
+};
+/*
+    6-------5   Box behind xy plane
+    |\      |\
+    | 3-------2    y
+    7-|-----4 | -z |
+     \|      \|   \|
+      0-------1    '-----x
+*/
+#define BOX_SIZE 180
+GLfloat boxVerticies[8][3] =
+{
+  {-BOX_SIZE,-BOX_SIZE,0},{BOX_SIZE,-BOX_SIZE,0},
+  {BOX_SIZE,BOX_SIZE,0},{-BOX_SIZE,BOX_SIZE,0},
+
+  {-BOX_SIZE,-BOX_SIZE,-1},{BOX_SIZE,-BOX_SIZE,-1},
+  {BOX_SIZE,BOX_SIZE,-1},{-BOX_SIZE,BOX_SIZE,-1},
 };
 GLuint boxElements[12][2]={{0,1},{1,2},{2,3},{3,0},{4,5},{5,6},{6,7},{7,4},{0,4},{1,5},{2,6},{3,7}};
 
