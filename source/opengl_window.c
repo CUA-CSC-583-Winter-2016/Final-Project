@@ -25,6 +25,7 @@ int create_window() {
   window = glfwCreateWindow(640, 480, "Off-Axis Perspective Box", NULL, NULL);
   glfwMakeContextCurrent(window);
   glfwSetKeyCallback(window, key_callback);
+  glfwSwapInterval(1);// Vsync on.
   glewExperimental = GL_TRUE;
   glewInit(); // HAS TO BE CALLED AFTER THE WINDOW IS CREATED! WHY DID NO ONE TELL ME THIS (0_0)
   return 0;
