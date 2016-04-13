@@ -29,4 +29,4 @@ mickey
 ## Gluing everything together
 mickey
 
-- [ ] [`source/main.c`](source/main.c)
+- [x] [`source/main.c`](source/main.c)
