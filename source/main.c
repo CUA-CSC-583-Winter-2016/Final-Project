@@ -19,7 +19,7 @@ int main (int argc, const char *argv[]) {
   printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference and actually glew all the code together.
   create_window();
   init_kinect();
-  set_clear_color(0.5,0.5,0.5);
+  set_clear_color(0.0,0.0,0.0);
   load_cube();
 
   GLfloat m[4*4] = { // This matrix at least works.
