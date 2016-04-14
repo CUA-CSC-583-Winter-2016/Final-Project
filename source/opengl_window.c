@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#define ES
 
 GLFWwindow *window;
 
@@ -18,9 +19,15 @@ int create_window() {
   if (!glfwInit())
     return 1;
   glfwSetErrorCallback(&error_callback);
+  #ifdef ES
+  glfwWindowHint(GLFW_CLIENT_API,GLFW_OPENGL_ES_API);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,0);
+  #else
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  #endif
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
   window = glfwCreateWindow(640, 480, "Off-Axis Perspective Box", NULL, NULL);
   glfwMakeContextCurrent(window);
