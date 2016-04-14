@@ -37,8 +37,9 @@ int main (int argc, const char *argv[]) {
     GLfloat eye[3];
     // TODO rotate and translate kinect local coord to global space.
     eye[0] = kx; eye[1] = ky; eye[2] = kz;
-    eye_proj_mat (-320.0,320.0,240.0,-240.0,1.0, eye, m); // Not working yet.
+    eye_proj_mat (-320.0,320.0,240.0,-240.0,200.0, eye, m); // Not working yet.
     set_cube_matrix(m);
+    
     #ifdef DEBUG
       printf("\nhead coord:\n(%i,%i,%i)\n",cx,cy,cz);
       printf("kinect local coord:\n(%f,%f,%f)\n",kx,ky,kz);
