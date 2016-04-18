@@ -1,5 +1,5 @@
 LIBS = -lGL -lglfw -lGLEW -lm
-CFLAGS = -Iinclude
+CFLAGS = -Iinclude -I/usr/include/libfreenect
 SRCS = $(wildcard source/*.c) $(wildcard source/*.cpp) # All C and CPP files
 SHSRCS = $(wildcard source/*.glsl) # All shader files
 OBJS = $(patsubst source/%.cpp, bin/%.o, $(patsubst source/%.c,bin/%.o,$(SRCS))) bin/shaders.o # All the objects that are needed for main

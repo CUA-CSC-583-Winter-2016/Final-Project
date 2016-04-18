@@ -1,5 +1,5 @@
 #include "kinect_interface.h"
-#include <libfreenect/libfreenect.h>
+#include <libfreenect.h>
 #include <math.h>
 #include <stdio.h>
 
