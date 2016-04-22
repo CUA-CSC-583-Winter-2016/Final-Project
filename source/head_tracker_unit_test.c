@@ -30,7 +30,7 @@ in vec2 t_coord;\n\
 uniform sampler2D tex;\n\
 \n\
 void main(void) {\n\
-  gl_FragColor = vec4(vec3(texture2D(tex,t_coord).r),1.0);\n\
+  gl_FragColor = vec4(vec3(texture2D(tex,t_coord).r*32),1.0);\n\
 }";
 
 void setup_plane() {
@@ -81,21 +81,23 @@ void setup_plane() {
   glVertexAttribPointer(glGetAttribLocation(plane_prog,"v_coord"),2,GL_FLOAT,GL_FALSE,sizeof(GLfloat)*2,(GLvoid *) 0);
   glBindVertexArray(0);
 
+  glUniform1i(glGetUniformLocation(plane_prog, "tex"), 0);
+
+
   glActiveTexture(GL_TEXTURE0);
   glGenTextures(1,&plane_tex);
   glBindTexture(GL_TEXTURE_2D, plane_tex);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glUniform1i(glGetUniformLocation(plane_prog, "tex"), 0);
-  uint16_t random[640*480];
+  uint16_t b[640*480];
   for (int i = 0; i < 640*480; i++) {
-    random[i] = rand();
+    b[i] = rand();
   }
-  glTexImage2D(GL_TEXTURE_2D,0,GL_RED,640,480,0,GL_RED,GL_UNSIGNED_SHORT,random);
+
+  glTexImage2D(GL_TEXTURE_2D,0,GL_RED,640,480,0,GL_RED,GL_UNSIGNED_SHORT,b);
 }
 
 void buffer_depth(uint16_t *depth) {
-  glActiveTexture(GL_TEXTURE0);
   glTexImage2D(GL_TEXTURE_2D,0,GL_RED,640,480,0,GL_RED,GL_UNSIGNED_SHORT,depth);
 }
 
@@ -105,22 +107,39 @@ void draw_plane() {
   glBindVertexArray(plane_VAO);
 }
 
+void depth_cb(freenect_device *dev, void *v_depth, uint32_t timestamp) {
+  buffer_depth((uint16_t *)v_depth);
+}
 
 int main(int argc, char* argv[]) {
+  //init kinect
   freenect_context *f_ctx;
   freenect_device *f_dev;
   freenect_init(&f_ctx,NULL);
   freenect_select_subdevices(f_ctx, (freenect_device_flags)(FREENECT_DEVICE_CAMERA));
   if (!freenect_num_devices(f_ctx)) {
     printf("No devices found\n");
+    freenect_shutdown(f_ctx);
     return 1;
   }
   freenect_open_device(f_ctx,&f_dev,0);
+  freenect_frame_mode fm = freenect_find_depth_mode(FREENECT_RESOLUTION_MEDIUM,FREENECT_DEPTH_11BIT);
+  printf("width:\t%i\nheight:%i\nbytes:%i\n",fm.width,fm.height,fm.bytes);
+  freenect_set_depth_mode(f_dev,fm);
+  freenect_set_depth_callback(f_dev, depth_cb);
+  freenect_start_depth(f_dev);
 
-
+  //draw
+  uint16_t b[640*480],c[640*480];
   create_window();
   setup_plane();
   while(!should_close_window()) {
+    freenect_set_depth_buffer(f_dev,b);
+    if(freenect_process_events(f_ctx) < 0) {
+      break;
+    }
+
+    //buffer_depth(b);
     draw_plane();
     swap_buffers();
   }
