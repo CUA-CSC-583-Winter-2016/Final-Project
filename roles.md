@@ -1,4 +1,4 @@
-#Roles
+# Roles
 
 - [x] Implemented
 - [ ] Working on it
@@ -6,7 +6,7 @@
 ## Matrix and linear algebra etc.
 timmy, andy
 
-- [ ] [`include/matrix_math.h`](include/matrix_math.h) [`source/matrix_math.c`](source/matrix_math.c)
+- [x] [`include/matrix_math.h`](include/matrix_math.h) [`source/matrix_math.c`](source/matrix_math.c)
 
 ## Kinect data acquisition
 fily, gabe
