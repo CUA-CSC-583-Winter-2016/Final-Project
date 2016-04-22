@@ -21,7 +21,7 @@ out vec2 t_coord;\n\
 \n\
 void main(void) {\n\
   gl_Position = vec4(v_coord, 0.0, 1.0);\n\
-  t_coord = (v_coord + 1.0) / 2.0;\n\
+  t_coord = vec2(1.0 + v_coord.x,1.0 - +v_coord.y) / 2.0;\n\
 }";
 
   const char * plane_frag_shader =
@@ -138,8 +138,6 @@ int main(int argc, char* argv[]) {
     if(freenect_process_events(f_ctx) < 0) {
       break;
     }
-
-    //buffer_depth(b);
     draw_plane();
     swap_buffers();
   }
