@@ -16,15 +16,15 @@ void printmat(GLfloat *m) {
 }
 
 int main (int argc, const char *argv[]) {
-  printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference and actually glew all the code together.
+  printf("Good news everyone, it's compiling!\n"); //TODO remove futurama reference and actually glue all the code together.
   create_window();
   init_kinect();
   set_clear_color(0.0,0.0,0.0);
   load_cube();
 
-  GLfloat m[4*4];
-  uint16_t c[640*480];
-  uint16_t b[640*480];
+  GLfloat m[4];
+  uint16_t c[640*480]; // Current depth
+  uint16_t b[640*480]; // Background depth
   get_depth(b);
   int cx = 0, cy = 0; // Kinect camera x y z
   uint16_t cz = 0;
@@ -39,7 +39,7 @@ int main (int argc, const char *argv[]) {
     eye[0] = kx; eye[1] = ky; eye[2] = kz;
     eye_proj_mat (-320.0,320.0,240.0,-240.0,200.0, eye, m); // Not working yet.
     set_cube_matrix(m);
-    
+
     #ifdef DEBUG
       printf("\nhead coord:\n(%i,%i,%i)\n",cx,cy,cz);
       printf("kinect local coord:\n(%f,%f,%f)\n",kx,ky,kz);
