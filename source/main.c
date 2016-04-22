@@ -22,7 +22,7 @@ int main (int argc, const char *argv[]) {
   set_clear_color(0.0,0.0,0.0);
   load_cube();
 
-  GLfloat m[4];
+  GLfloat m[4*4];
   uint16_t c[640*480]; // Current depth
   uint16_t b[640*480]; // Background depth
   get_depth(b);
@@ -37,9 +37,8 @@ int main (int argc, const char *argv[]) {
     GLfloat eye[3];
     // TODO rotate and translate kinect local coord to global space.
     eye[0] = kx; eye[1] = ky; eye[2] = kz;
-    eye_proj_mat (-320.0,320.0,240.0,-240.0,200.0, eye, m); // Not working yet.
+    eye_proj_mat(-320.0,320.0,240.0,-240.0,200.0, eye, m); // Not working yet.
     set_cube_matrix(m);
-
     #ifdef DEBUG
       printf("\nhead coord:\n(%i,%i,%i)\n",cx,cy,cz);
       printf("kinect local coord:\n(%f,%f,%f)\n",kx,ky,kz);

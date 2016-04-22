@@ -36,4 +36,4 @@ head_tracker_unit_test: bin/head_tracker_unit_test
 
 # Housekeeping
 clean:
-	rm bin/*.o
+	rm bin/*
