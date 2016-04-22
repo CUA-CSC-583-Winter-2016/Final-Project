@@ -23,6 +23,9 @@ bin/opengl_rendering.o: source/opengl_rendering.c include/opengl_rendering.h inc
 bin/%.o: source/%.cpp include/%.h
 	$(CXX) $(CFLAGS) -c $< -o $@
 
+bin/%.o: source/%.cpp include/%.hpp
+	$(CXX) $(CFLAGS) -c $< -o $@
+
 SHSRCS = $(wildcard source/*.glsl) # All shader files
 bin/shaders.o: $(SHSRCS)
 	ld -r -b binary -o bin/shaders.o $(SHSRCS)
@@ -33,6 +36,9 @@ test: bin/main
 
 head_tracker_unit_test: bin/head_tracker_unit_test
 	bin/head_tracker_unit_test
+
+fakenect_head_tracker_unit_test: bin/head_tracker_unit_test
+	fakenect ../Downloads/thanksgiving0 bin/head_tracker_unit_test
 
 # Housekeeping
 clean:
