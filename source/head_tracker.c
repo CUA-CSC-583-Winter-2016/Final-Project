@@ -17,11 +17,18 @@
 float rotation = 0;
 void locate_head(const uint16_t *background, const uint16_t *current, int width, int height, int *headx, int *heady, uint16_t *headz){
 
-  *headx=320+320*cos(rotation);
-  *heady=240+240*sin(rotation);
-  rotation += .005;
-  if (rotation > 2 * M_PI) {
-    rotation -= 2*M_PI;
+  int x = 0;
+  int y = 0;
+  int found = 0;
+  for (y = 0; y < width && !found; y++) {
+    for (x = 0; x < height && !found; x++) {
+      uint16_t difference = current[x + y*width] - background[x + y*width];
+      if (abs(difference)) {
+        *headx = x;
+        *heady = y;
+        *headz = current[*headx + *heady*width];
+        return;
+      }
+    }
   }
-  *headz = current[*headx + *heady*width];
 }
