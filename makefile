@@ -7,7 +7,7 @@ default: test
 bin/main: bin/main.o bin/head_tracker.o bin/kinect_interface.o bin/matrix_math.o bin/opengl_rendering.o bin/opengl_window.o bin/shaders.o
 	$(CC) $(CFLAGS) bin/main.o bin/head_tracker.o bin/kinect_interface.o bin/matrix_math.o bin/opengl_rendering.o bin/opengl_window.o bin/shaders.o $(LIBS) -o bin/main
 
-bin/head_tracker_unit_test: source/head_tracker_unit_test.c bin/kinect_interface.o bin/opengl_window.o
+bin/head_tracker_unit_test: source/head_tracker_unit_test.c  bin/head_tracker.o bin/kinect_interface.o bin/opengl_window.o
 	$(CC) $(CFLAGS) source/head_tracker_unit_test.c bin/head_tracker.o bin/kinect_interface.o bin/opengl_window.o -o bin/head_tracker_unit_test -lGL -lGLEW -lglfw -lm -lfreenect
 
 bin/main.o: source/main.c
@@ -37,7 +37,7 @@ test: bin/main
 head_tracker_unit_test: bin/head_tracker_unit_test
 	bin/head_tracker_unit_test
 
-fakenect_head_tracker_unit_test: bin/head_tracker_unit_test
+fakenect_	head_tracker_unit_test: bin/head_tracker_unit_test
 	fakenect ../Downloads/thanksgiving0 bin/head_tracker_unit_test
 
 # Housekeeping
