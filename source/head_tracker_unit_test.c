@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "opengl_window.h"
-#include "opengl_rendering.h"
 #include "GL/glew.h"
 #include <stdlib.h>
 #include <stdint.h>
