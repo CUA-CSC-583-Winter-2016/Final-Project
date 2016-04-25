@@ -1,7 +1,8 @@
 #include "kinect_interface.h"
-#include <libfreenect/libfreenect.h>
+#include <libfreenect.h>
 #include <math.h>
 #include <stdio.h>
+#define M_PI 3.14159265358979323846
 
 int init_kinect() {
   return 0;
