@@ -3,7 +3,6 @@ CFLAGS = -Iinclude -I/usr/include/libfreenect
 
 default: test
 
-#Object files required for main program.
 bin/main: bin/main.o bin/head_tracker.o bin/kinect_interface.o bin/matrix_math.o bin/opengl_rendering.o bin/opengl_window.o bin/shaders.o
 	$(CC) $(CFLAGS) bin/main.o bin/head_tracker.o bin/kinect_interface.o bin/matrix_math.o bin/opengl_rendering.o bin/opengl_window.o bin/shaders.o $(LIBS) -o bin/main
 
