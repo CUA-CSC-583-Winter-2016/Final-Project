@@ -37,7 +37,7 @@ test: bin/main
 head_tracker_unit_test: bin/head_tracker_unit_test
 	bin/head_tracker_unit_test
 
-fakenect_	head_tracker_unit_test: bin/head_tracker_unit_test
+fakenect_head_tracker_unit_test: bin/head_tracker_unit_test
 	fakenect ../Downloads/thanksgiving0 bin/head_tracker_unit_test
 
 # Housekeeping
