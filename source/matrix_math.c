@@ -51,3 +51,17 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
   *outy = yin-240;
   *outz = zin;
 }
+
+
+void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1, int c2) {
+  int i, j, k;
+  for(i = 0; i < r1; i++) {
+    for(j = 0; j < c2; j++) {
+      GLfloat sum = 0;
+      for(k = 0; k < c1; k++) {
+	sum += *(m1+(i*r1+k)) + *(m2+(k*c1+j));
+      }
+      *(m3+(i*r1+j)) = sum;
+    }
+  }
+}
