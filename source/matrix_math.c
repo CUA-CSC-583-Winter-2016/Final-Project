@@ -65,3 +65,8 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
     }
   }
 }
+
+void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloat x_scale, GLfloat y_scale, GLfloat z_scale, GLfloat x_trans, GLfloat y_trans, GLfloat z_trans) {
+  
+
+}
