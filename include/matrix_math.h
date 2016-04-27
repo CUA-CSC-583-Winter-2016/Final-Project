@@ -32,6 +32,7 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
 
 /**
   Performs matrix multiplication m1 * m2 = m3.
+  Matrices must be distinct (in memory).
   @param m1 first matrix.
   @param m2 second matrix.
   @param m3 result matrix.

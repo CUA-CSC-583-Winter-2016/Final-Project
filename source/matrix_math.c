@@ -1,5 +1,6 @@
 #include "matrix_math.h"
 #include <GL/glew.h>
+#include <math.h>
 
 void eye_proj_mat(GLfloat left, GLfloat right, GLfloat top, GLfloat bottom, GLfloat far, const GLfloat *eye, GLfloat *mat) {
   // I believe this'll only work if everything is behind the xy plane in the -z direction.
@@ -67,6 +68,93 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
 }
 
 void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloat x_scale, GLfloat y_scale, GLfloat z_scale, GLfloat x_trans, GLfloat y_trans, GLfloat z_trans) {
+  /* scale
+    x_scale 0 0 0
+    0 y_scale 0 0
+    0 0 z_scale 0
+    0 0 0       1
+   */
+
+  GLfloat scaling[4*4] = {0};
+  scaling[0] = x_scale;
+  scaling[5] = y_scale;
+  scaling[10] = z_scale;
+  scaling[15] = 1;
   
 
+  /* trans
+    0 0 0 x_trans
+    0 0 0 y_trans
+    0 0 0 z_trans
+    0 0 0 1
+  */
+
+  GLfloat translation[4*4] = {0};
+  scaling[3] = x_trans;
+  scaling[7] = y_trans;
+  scaling[11] = z_trans;
+  scaling[15] = 1;
+
+  /* rotate about z
+     cos -sin 0 0
+     sin cos  0 0
+     0   0    1 0
+     0   0    0 1
+   */
+
+  GLfloat rotation_Z[4*4] = {0};
+  rotation_Z[0] = cos(psi);
+  rotation_Z[1] = -sin(psi);
+  rotation_Z[4] = -rotation_Z[1];
+  rotation_Z[5] = rotation_Z[0];
+  rotation_Z[10] = 1;
+  rotation_Z[15] = 1;
+  
+  /* rotate about x
+     1 0   0    0
+     0 cos -sin 0
+     0 sin cos  0
+     0   0    0 1
+   */
+
+  GLfloat rotation_X[4*4] = {0};
+  rotation_X[0] = 1;
+  rotation_X[5] = cos(theta);
+  rotation_X[6] = -sin(theta);
+  rotation_X[9] = -rotation_X[6];
+  rotation_X[10] = rotation_X[5];
+  rotation_X[15] = 1;
+
+  /* rotate about y
+     cos  0 sin 0
+     0    1 0   0
+     -sin 0 cos 0
+     0   0  0   1
+   */
+
+  GLfloat rotation_Y[4*4] = {0};
+  rotation_Y[0] = cos(phi);
+  rotation_Y[2] = sin(phi);
+  rotation_Y[5] = 1;
+  rotation_Y[8] = -rotation_Z[2];
+  rotation_Y[10] = rotation_Z[0];
+  rotation_Y[15] = 1;
+
+  GLfloat tmp[4*4];
+
+  mat_mult(rotation_Z, scaling, m, 4, 4, 4);
+  for(int i = 0; i<16; i++) {
+    tmp[i] = m[i];
+  }
+  mat_mult(rotation_X, tmp, m, 4, 4, 4);
+  for(int i = 0; i<16; i++) {
+    tmp[i] = m[i];
+  }
+  mat_mult(rotation_Y, tmp, m, 4, 4, 4);
+  for(int i = 0; i<16; i++) {
+    tmp[i] = m[i];
+  }
+  mat_mult(translation, tmp, m, 4, 4, 4);
 }
+
+
