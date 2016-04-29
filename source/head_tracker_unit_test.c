@@ -33,7 +33,7 @@ in vec2 t_coord;\n\
 uniform sampler2D tex;\n\
 \n\
 void main(void) {\n\
-  gl_FragColor = vec4(vec3(texture2D(tex,t_coord).r*32),1.0);\n\
+  gl_FragColor = vec4(vec3(1.0-texture2D(tex,t_coord).r*32),1.0);\n\
 }";
 
 void setup_plane() {
