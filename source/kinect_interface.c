@@ -2,13 +2,12 @@
 #include <libfreenect.h>
 #include <math.h>
 #include <stdio.h>
-#define M_PI 3.14159265358979323846
 
 
 freenect_context *f_ctx;
 freenect_device *f_dev;
 
-void depth_cb(freenect_device *dev, void *v_depth, uint32_t timestamp) {
+void depth_callback(freenect_device *dev, void *v_depth, uint32_t timestamp) {
   // Just an empty callback
 }
 
@@ -25,9 +24,9 @@ int init_kinect() {
   freenect_frame_mode fm = freenect_find_depth_mode(FREENECT_RESOLUTION_MEDIUM,FREENECT_DEPTH_11BIT);
   printf("width:\t%i\nheight:%i\nbytes:%i\n",fm.width,fm.height,fm.bytes);
   freenect_set_depth_mode(f_dev,fm);
-  freenect_set_depth_callback(f_dev, depth_cb);
+  freenect_set_depth_callback(f_dev, depth_callback);
   freenect_start_depth(f_dev);
-
+  return 0;
 }
 
 void get_depth(uint16_t *buffer) {
