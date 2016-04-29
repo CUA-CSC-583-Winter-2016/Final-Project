@@ -22,11 +22,12 @@ void locate_head(const uint16_t *background, const uint16_t current[], int width
 
   int x;
   int y;
+
   // The offset in the for loops makes sure we can always see the crosshairs.
-  for(y = 100; y < height-100; y++) {
-    for(x = 100; x < width-100; x++) {
-      if(current[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && (current[x + y*width] - background[x + y*width]) > 100) {
-        int yc = y - (int)(A * current[x+y*width]);
+  for(y = 1; y < height-1; y+=1) {
+    for(x = 1; x < width-1; x+=1) {
+      if(current[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && background[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && (background[x + y*width]-current[x + y*width]) > 100) {
+        /*int yc = y - (int)(A * current[x+y*width]);
         int xl=x,xr=x;
         for(int xltest = x; x > yc*width; x--) {
           if(current[xltest + yc*width] == FREENECT_DEPTH_RAW_NO_VALUE || (current[xltest + yc*width] - background[xltest + yc*width]) > 100) {
@@ -41,11 +42,16 @@ void locate_head(const uint16_t *background, const uint16_t current[], int width
           }
         }
         int xc = xl+xr/2;
-        *headx = xc;
-        *heady = yc;
+        *headx = x;
+        *heady = y;
         *headz = current[*headx + *heady*width];
+        return;*/
+        *headx = x;
+        *heady = y;
+        *headz = 100;
         return;
       }
+
     }
   }
 }
