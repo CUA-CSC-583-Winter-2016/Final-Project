@@ -3,7 +3,9 @@
 #define M_PI 3.14159265358979323846
 
 // Tweakables
-float A;
+float A = 40000;
+int BG_THRESHOLD = 70;
+
 
 /*
   Just a note,
@@ -24,31 +26,33 @@ void locate_head(const uint16_t *background, const uint16_t current[], int width
   int y;
 
   // The offset in the for loops makes sure we can always see the crosshairs.
+  // this loop finds the foreground.
   for(y = 1; y < height-1; y+=1) {
     for(x = 1; x < width-1; x+=1) {
-      if(current[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && background[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && (background[x + y*width]-current[x + y*width]) > 100) {
-        /*int yc = y - (int)(A * current[x+y*width]);
-        int xl=x,xr=x;
-        for(int xltest = x; x > yc*width; x--) {
-          if(current[xltest + yc*width] == FREENECT_DEPTH_RAW_NO_VALUE || (current[xltest + yc*width] - background[xltest + yc*width]) > 100) {
-            xl = xltest;
+      // For a pixel to be foreground, the current frame must not be unknown, and the
+      if(current[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && background[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && (background[x + y*width]-current[x + y*width]) > BG_THRESHOLD) {
+        // Find the center of the head
+        int yc = y + (int) (A / current[x+y*width]);
+        if (yc < 0) {
+          yc = 0;
+        } else if (yc > 479) {
+          yc = 479;
+        }
+        int xl,xr;
+        for(xl = x; xl >= 1 ; xl-=1) {
+          if(current[xl+ yc*width] == FREENECT_DEPTH_RAW_NO_VALUE || (background[xl + yc*width]-current[xl + yc*width]) <= BG_THRESHOLD) {
             break;
           }
         }
-        for(int xrtest = x; x > yc*width; x--) {
-          if(current[xrtest + yc*width] == FREENECT_DEPTH_RAW_NO_VALUE || (current[xrtest + yc*width] - background[xrtest + yc*width]) > 100) {
-            xr = xrtest;
+        for(xr = x; xr < width; xr+=1) {
+          if(current[xr + yc*width] == FREENECT_DEPTH_RAW_NO_VALUE || (background[xr + yc*width]-current[xr + yc*width]) <= BG_THRESHOLD) {
             break;
           }
         }
-        int xc = xl+xr/2;
-        *headx = x;
-        *heady = y;
-        *headz = current[*headx + *heady*width];
-        return;*/
-        *headx = x;
-        *heady = y;
-        *headz = 100;
+        int xc = (xl+xr)/2;
+        *headx = xc;
+        *heady = yc;
+        *headz = current[x + yc*width];
         return;
       }
 
