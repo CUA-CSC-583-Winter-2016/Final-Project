@@ -32,6 +32,7 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
 
 /**
   Performs matrix multiplication m1 * m2 = m3.
+  Matrices must be distinct (in memory).
   @param m1 first matrix.
   @param m2 second matrix.
   @param m3 result matrix.
@@ -40,5 +41,20 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
   @param c2 columns of second matrix.
 */
 void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1, int c2);
+
+/**
+  Scales, rotates, and translates.
+  @param m resulting transformation matrix.
+  @param theta rotation about x-axis
+  @param phi rotation about y-axis
+  @param psi rotation about z-axis
+  @param x_scale scaling on x-axis
+  @param y_scale scaling on y-axis
+  @param z_scale scaling on z-axis
+  @param x_trans translation on x-axis
+  @param y_trans translation on y-axis
+  @param z_trans translation on z-axis
+ */
+void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloat x_scale, GLfloat y_scale, GLfloat z_scale, GLfloat x_trans, GLfloat y_trans, GLfloat z_trans);
 
 #endif
