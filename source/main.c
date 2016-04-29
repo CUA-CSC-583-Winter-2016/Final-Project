@@ -25,7 +25,9 @@ int main (int argc, const char *argv[]) {
   GLfloat m[4*4];
   uint16_t c[640*480]; // Current depth
   uint16_t b[640*480]; // Background depth
-  get_depth(b);
+  for (int i = 0; i < 300; i++)
+    get_depth(b);
+  int x=0,y=0;
   int cx = 0, cy = 0; // Kinect camera x y z
   uint16_t cz = 0;
   while(!should_close_window()) {
