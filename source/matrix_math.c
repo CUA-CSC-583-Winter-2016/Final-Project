@@ -48,8 +48,8 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
   // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
   // https://msdn.microsoft.com/en-us/library/hh973078.aspx
   // TODO implement
-  *outx = xin-320;
-  *outy = yin-240;
+  *outx = -xin+320;
+  *outy = -yin+240;
   *outz = zin;
 }
 
@@ -80,7 +80,7 @@ void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloa
   scaling[5] = y_scale;
   scaling[10] = z_scale;
   scaling[15] = 1;
-  
+
 
   /* trans
     0 0 0 x_trans
@@ -109,7 +109,7 @@ void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloa
   rotation_Z[5] = rotation_Z[0];
   rotation_Z[10] = 1;
   rotation_Z[15] = 1;
-  
+
   /* rotate about x
      1 0   0    0
      0 cos -sin 0
@@ -156,5 +156,3 @@ void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloa
   }
   mat_mult(translation, tmp, m, 4, 4, 4);
 }
-
-

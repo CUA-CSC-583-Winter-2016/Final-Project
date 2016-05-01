@@ -35,3 +35,14 @@ void get_depth(uint16_t *buffer) {
     return;
   }
 }
+
+void fill_depth(uint16_t *buffer) {
+  uint16_t last_good_pixel = FREENECT_DEPTH_RAW_MAX_VALUE;
+  for (int i = 0; i < 640*480; i++) {
+    if(buffer[i] == FREENECT_DEPTH_RAW_NO_VALUE) {
+      buffer[i] = last_good_pixel;
+    } else {
+      last_good_pixel = buffer[i];
+    }
+  }
+}

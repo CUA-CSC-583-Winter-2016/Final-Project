@@ -14,4 +14,10 @@ int init_kinect();
 */
 void get_depth(uint16_t *buffer);
 
+/**
+  Fill the unkown pixels with approximately correct values.
+*/
+void fill_depth(uint16_t *buffer);
+
+
 #endif
