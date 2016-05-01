@@ -8,6 +8,8 @@
 */
 int init_kinect();
 
+void shutdown_kinect();
+
 /**
   Get depth buffer.
   @param buffer A pointer to an array for depth data. Must be at least 640 * 480 * 2 bytes in size.

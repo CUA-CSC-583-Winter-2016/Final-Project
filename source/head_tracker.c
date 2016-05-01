@@ -3,8 +3,8 @@
 #define M_PI 3.14159265358979323846
 
 // Tweakables
-float A = 40000;
-int BG_THRESHOLD = 70;
+float A = 40000;// 40000 works OK, needs tweaking
+int BG_THRESHOLD = 50;// 70 works pretty well.
 
 
 /*
@@ -32,7 +32,7 @@ void locate_head(const uint16_t *background, const uint16_t current[], int width
       // For a pixel to be foreground, the current frame must not be unknown, and the
       if(current[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && background[x + y*width] != FREENECT_DEPTH_RAW_NO_VALUE && (background[x + y*width]-current[x + y*width]) > BG_THRESHOLD) {
         // Find the center of the head
-        int yc = y + (int) (A / current[x+y*width]);
+        int yc = y + (int) (A / current[x+y*width]); // Go down by this ammount.
         if (yc < 0) {
           yc = 0;
         } else if (yc > 479) {

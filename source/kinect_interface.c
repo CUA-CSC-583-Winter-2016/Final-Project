@@ -29,6 +29,11 @@ int init_kinect() {
   return 0;
 }
 
+void shutdown_kinect() {
+  freenect_close_device(f_dev);
+  freenect_shutdown(f_ctx);
+}
+
 void get_depth(uint16_t *buffer) {
   freenect_set_depth_buffer(f_dev,buffer);
   if(freenect_process_events(f_ctx) < 0) {
