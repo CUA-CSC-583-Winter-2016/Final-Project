@@ -1,10 +1,9 @@
 #include "head_tracker.h"
 #include "stdlib.h"
-#define M_PI 3.14159265358979323846
 
 // Tweakables
-float A = 40000;// 40000 works OK, needs tweaking
-int BG_THRESHOLD = 50;// 70 works pretty well.
+float A = 40000;// Used to calculate how far down the center of the head is. 40000 works OK, needs tweaking
+int BG_THRESHOLD = 70;// 70 works pretty well.
 
 
 /*

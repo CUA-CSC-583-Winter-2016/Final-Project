@@ -37,26 +37,57 @@ int main (int argc, const char *argv[]) {
     unsigned char count;
   #endif
 
-  int x=0,y=0;
+  // Setup variables to remain thoughtout loop.
   int cx = 0, cy = 0; // Kinect camera x y
   uint16_t cz = 0; // Kinect camera z
   while(!should_close_window()) {
     // locate head
     get_depth(c);
     locate_head(b, c, 640,480, &cx, &cy, &cz);
-    GLfloat kx, ky, kz; // Kinect local x y z
-    unproject_kinect_coords(cx,cy,cz,&kx,&ky,&kz);
-    GLfloat eye[3];
-    // TODO rotate and translate kinect local coord to global space.
-    eye[0] = kx; eye[1] = ky; eye[2] = kz;
+
+    // unproject kinect camera coord.
+    GLfloat k_eye[4]; k_eye[3] = 1;
+    unproject_kinect_coords(cx,cy,cz,&k_eye[0],&k_eye[1],&k_eye[2]);
+
+    // TODO rotate and translate kinect camera coord to global space.
+    GLfloat tm[4*4] = {
+      4,0,0,0,
+      0,4,0,0,
+      0,0,2,-10,
+      0,0,0,1}; // transform matrix;
+      /*
+    GLfloat theta = 0;
+    GLfloat phi = 0;
+    GLfloat psi = 0;
+    GLfloat x_scale = 10;
+    GLfloat y_scale = 10;
+    GLfloat z_scale = 1;
+    GLfloat x_trans = 0;
+    GLfloat y_trans = 0;
+    GLfloat z_trans = 0;
+    scale_rot_trans(tm, theta, phi, psi, x_scale, y_scale, z_scale, x_trans, y_trans, z_trans);
+    */
+    GLfloat g_eye[4]; g_eye[3] = 1;
+    mat_mult(tm,k_eye,g_eye,4,4,1);
+
+
+
+    // Calculate and set perspective transform
     GLfloat m[4*4]; // Transform matrix.
-    eye_proj_mat(-320.0,320.0,240.0,-240.0,200.0, eye, m);
+    eye_proj_mat(-320.0,320.0,240.0,-240.0,200.0,g_eye, m);
     set_cube_matrix(m);
+
+    // Output debug info
     #ifdef DEBUG
-      printf("\nhead coord:\n(%i,%i,%i)\n",cx,cy,cz);
-      printf("kinect local coord:\n(%f,%f,%f)\n",kx,ky,kz);
-      printf("eye coord:\n(%f,%f,%f)\n",eye[0],eye[1],eye[2]);
-      printmat(m);
+      if (count < 30) {
+        count++;
+      } else {
+        count = 0;
+        printf("\nkinect local camera coord:\n(%i,%i,%i)\n",cx,cy,cz);
+        printf("kinect local unprojected coord:\n(%f,%f,%f,%f)\n",k_eye[0],k_eye[1],k_eye[2],k_eye[3]);
+        printf("global eye coord:\n(%f,%f,%f,%f)\n",g_eye[0],g_eye[1],g_eye[2],g_eye[3]);
+        printmat(m);
+      }
     #endif
 
     // render

@@ -60,9 +60,9 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
     for(j = 0; j < c2; j++) {
       GLfloat sum = 0;
       for(k = 0; k < c1; k++) {
-	sum += m1[i*r1+k] * m2[k*c1+j];
+	sum += m1[i*c1+k] * m2[k*c2+j];
       }
-      *(m3+(i*r1+j)) = sum;
+      m3[i*c2+j] = sum;
     }
   }
 }
