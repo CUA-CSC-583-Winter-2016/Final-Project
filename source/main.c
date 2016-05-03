@@ -59,8 +59,8 @@ int main (int argc, const char *argv[]) {
     GLfloat theta = 0;
     GLfloat phi = 0;
     GLfloat psi = 0;
-    GLfloat x_scale = 10;
-    GLfloat y_scale = 10;
+    GLfloat x_scale = 1;
+    GLfloat y_scale = 1;
     GLfloat z_scale = 1;
     GLfloat x_trans = 0;
     GLfloat y_trans = 0;

@@ -48,8 +48,8 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
   // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
   // https://msdn.microsoft.com/en-us/library/hh973078.aspx
   // TODO implement
-  *outx = -xin+320;
-  *outy = -yin+240;
+  *outx = (-xin+320)/(float)zin*500;
+  *outy = (-yin+240)/(float)zin*500;
   *outz = zin;
 }
 

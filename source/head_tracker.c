@@ -3,7 +3,7 @@
 
 // Tweakables
 float A = 40000;// Used to calculate how far down the center of the head is. 40000 works OK, needs tweaking
-int BG_THRESHOLD = 70;// 70 works pretty well.
+int BG_THRESHOLD = 40;// 70 works pretty well.
 
 
 /*
