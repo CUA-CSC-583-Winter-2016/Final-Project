@@ -67,6 +67,19 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
   }
 }
 
+
+void kinect_rot_trans_thingy(const GLfloat *kinectOffset, const GLfloat kinectAngle, const GLfloat *pointOffset, GLfloat *returnPoint) {
+  GLfloat hyp = sqrt(pointOffset[0]*pointOffset[0]+pointOffset[2]*pointOffset[2]);
+  GLfloat zOff = hyp*cos(kinectAngle);
+  GLfloat xOff = hyp*sin(kinectAngle);
+
+  returnPoint[0] = kinectOffset[0] + xOff; // x = kinect_x + hyp*sin(theta)
+  returnPoint[1] = kinectOffset[1] + pointOffset[1]; // y = kinect_y + point_y
+  returnPoint[2] = zOff+kinectOffset[2]; // z = kinect_z + hyp*cos(theta)
+  
+}
+
+
 void scale_rot_trans(GLfloat *m, GLfloat theta, GLfloat phi, GLfloat psi, GLfloat x_scale, GLfloat y_scale, GLfloat z_scale, GLfloat x_trans, GLfloat y_trans, GLfloat z_trans) {
   /* scale
     x_scale 0 0 0

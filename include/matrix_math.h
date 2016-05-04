@@ -42,6 +42,9 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
 */
 void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1, int c2);
 
+void kinect_rot_trans_thingy(const GLfloat *kinectOffset, const GLfloat kinectAngle, const GLfloat *pointOffset, GLfloat *returnPoint);
+
+
 /**
   Scales, rotates, and translates.
   @param m resulting transformation matrix.
