@@ -70,8 +70,8 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
 
 void kinect_rot_trans_thingy(const GLfloat *kinectOffset, const GLfloat kinectAngle, const GLfloat *pointOffset, GLfloat *returnPoint) {
   GLfloat hyp = sqrt(pointOffset[0]*pointOffset[0]+pointOffset[2]*pointOffset[2]);
-  GLfloat zOff = hyp*cos(kinectAngle);
-  GLfloat xOff = hyp*sin(kinectAngle);
+  GLfloat zOff = hyp*sin(kinectAngle);
+  GLfloat xOff = hyp*cos(kinectAngle);
 
   returnPoint[0] = kinectOffset[0] + xOff; // x = kinect_x + hyp*sin(theta)
   returnPoint[1] = kinectOffset[1] + pointOffset[1]; // y = kinect_y + point_y
