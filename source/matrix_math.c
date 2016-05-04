@@ -43,6 +43,36 @@ void eye_proj_mat(GLfloat left, GLfloat right, GLfloat top, GLfloat bottom, GLfl
 
 
 void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfloat *outy, GLfloat *outz) {
+// may be necccessary to convert distance to the zin data
+z = 0.1236 * Math.tan(zin / 2842.5 + 1.1863);
+  // See these pages for info on the kinect depth data
+  // https://openkinect.org/wiki/Calibration
+  // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
+  // https://msdn.microsoft.com/en-us/library/hh973078.aspx
+  // TODO implement
+  //*outx = xin-320;
+  //*outy = yin-240;
+  //*outz = zin;
+//these constants may not be accurate for this case
+//both the data I'm recceiving and this needs to be tested
+float minDistance = -10;
+float scaleFactor = .0021;
+*outx = (xin - 320 / 2) * (z + minDistance) * scaleFactor;
+*outy = (yin - 240 / 2) * (z + minDistance) * scaleFactor;
+//float theta_offset = 1;
+//float pixal_theta = Math.pi-2*theta_offset;
+//*outx = -zin/Math.tan(theta_offset+xin*pixal_theta);
+//*outy = -zin/Math.tan(theta_offset+yin*pixal_theta);
+*outz = z;
+//Where
+//minDistance = -10
+//scaleFactor = .0021.
+//These values were found by hand.
+
+}
+
+/*
+void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfloat *outy, GLfloat *outz) {
   // See these pages for info on the kinect depth data
   // https://openkinect.org/wiki/Calibration
   // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
@@ -52,6 +82,7 @@ void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfl
   *outy = (-yin+240)/(float)zin*500;
   *outz = zin;
 }
+*/
 
 
 void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1, int c2) {
