@@ -44,7 +44,8 @@ void eye_proj_mat(GLfloat left, GLfloat right, GLfloat top, GLfloat bottom, GLfl
 
 void unproject_kinect_coords(int xin, int yin, uint16_t zin, GLfloat *outx, GLfloat *outy, GLfloat *outz) {
 // may be necccessary to convert distance to the zin data
-z = 0.1236 * Math.tan(zin / 2842.5 + 1.1863);
+//GLfloat z = 0.1236 * tan((zin / 2842.5 + 1.1863)*180/3.14);
+GLfloat z = 100/(-0.00307 * zin + 3.33);
   // See these pages for info on the kinect depth data
   // https://openkinect.org/wiki/Calibration
   // https://openkinect.org/wiki/Imaging_Information#Depth_Camera
@@ -57,8 +58,8 @@ z = 0.1236 * Math.tan(zin / 2842.5 + 1.1863);
 //both the data I'm recceiving and this needs to be tested
 float minDistance = -10;
 float scaleFactor = .0021;
-*outx = (xin - 320 / 2) * (z + minDistance) * scaleFactor;
-*outy = (yin - 240 / 2) * (z + minDistance) * scaleFactor;
+*outx = -(xin - 320) * (z + minDistance) * scaleFactor;
+*outy = -(yin - 240) * (z + minDistance) * scaleFactor;
 //float theta_offset = 1;
 //float pixal_theta = Math.pi-2*theta_offset;
 //*outx = -zin/Math.tan(theta_offset+xin*pixal_theta);
@@ -100,14 +101,22 @@ void mat_mult(const GLfloat *m1, const GLfloat *m2, GLfloat *m3, int r1, int c1,
 
 
 void kinect_rot_trans_thingy(const GLfloat *kinectOffset, const GLfloat kinectAngle, const GLfloat *pointOffset, GLfloat *returnPoint) {
+  // This method didn't work :(
+  /*
   GLfloat hyp = sqrt(pointOffset[0]*pointOffset[0]+pointOffset[2]*pointOffset[2]);
-  GLfloat zOff = hyp*sin(kinectAngle);
-  GLfloat xOff = hyp*cos(kinectAngle);
+  GLfloat zOff = hyp*cos(kinectAngle);
+  GLfloat xOff = hyp*sin(kinectAngle);
 
   returnPoint[0] = kinectOffset[0] + xOff; // x = kinect_x + hyp*sin(theta)
   returnPoint[1] = kinectOffset[1] + pointOffset[1]; // y = kinect_y + point_y
-  returnPoint[2] = zOff+kinectOffset[2]; // z = kinect_z + hyp*cos(theta)
-  
+  returnPoint[2] = zOff + kinectOffset[2]; // z = kinect_z + hyp*cos(theta)
+  */
+  // Link to the math I'm about to use: https://en.wikipedia.org/wiki/Rotation_%28mathematics%29#Two_dimensions
+  // Swapping z for y for formula from link.
+  returnPoint[1] = kinectOffset[1] + pointOffset[1]; // Rotation does not affect y axis.
+  returnPoint[0] = kinectOffset[0] + pointOffset[0]*cos(kinectAngle) - pointOffset[2]*sin(kinectAngle);
+  returnPoint[2] = kinectOffset[2] + pointOffset[0]*sin(kinectAngle) + pointOffset[2]*cos(kinectAngle);
+
 }
 
 
